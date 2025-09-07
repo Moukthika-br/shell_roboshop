@@ -33,7 +33,7 @@ VALIDATE(){
     fi
 }
 
-dnf module disable nodejs-y &>>$LOG_FILE
+dnf module disable nodejs -y &>>$LOG_FILE
 VALIDATE $? "Disabling the  defaultnodejs"
 
 dnf module enable nodejs:20 -y &>>$LOG_FILE
