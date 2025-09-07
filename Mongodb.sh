@@ -39,10 +39,10 @@ VALIDATE $? "Copying mongoDB repo"
 dnf install mongodb-org -y  &>>$LOG_FILE
 VALIDATE $? "Installing MongoDB server"
 
-systemct1 enable mongod &>>$LOG_FILE
+systemctl enable mongod &>>$LOG_FILE
 VALIDATE $? "Enabling the MongoDB"
 
-systemct1 start mongod &>>$LOG_FILE
+systemctl start mongod &>>$LOG_FILE
 VALIDATE $? "starting the MongoDB"
 
 sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf
