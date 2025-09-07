@@ -42,7 +42,7 @@ VALIDATE $? "enabling the nodejs"
 dnf install nodejs -y &>>$LOG_FILE
 VALIDATE $? "Installing the nodejs"
 
-useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOG_FILE
+useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop 
 VALIDATE $? "adding the application user"
 
 mkdir /app &>>$LOG_FILE
