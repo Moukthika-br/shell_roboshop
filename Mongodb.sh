@@ -48,6 +48,6 @@ VALIDATE $? "starting the MongoDB"
 sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf
 VALIDATE $? "Editing MondoDB conf file for remote connections"
 
-systemct1 restart mongod &>>$LOG_FILE
+systemctl restart mongod &>>$LOG_FILE
 VALIDATE $? "Restarting MongoDB"
 
