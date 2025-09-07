@@ -71,6 +71,8 @@ dnf install mongodb-mongosh -y &>>$LOG_FILE
 VALIDATE $? "Installing MongoDB client"
 
 mongosh --host mongodb.moukthika.site </app/db/master-data.js &>>$LOG_FILE
+VALIDATE $? "Loading data in mongo"
+
 
 
 
