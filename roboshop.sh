@@ -41,11 +41,13 @@ do
       --instance-ids "$INSTANCE_ID" \
       --query "Reservations[0].Instances[0].PublicIpAddress" \
       --output text)
+    RECORD_NAME="$instance.$DOMAIN_NAME"
   else
     IP=$(aws ec2 describe-instances \
       --instance-ids "$INSTANCE_ID" \
       --query "Reservations[0].Instances[0].PrivateIpAddress" \
       --output text)
+    RECORD_NAME="$DOMAIN_NAME"
   fi
 
   if [[ -z "$IP" || "$IP" == "None" ]]; then
@@ -64,7 +66,7 @@ do
       \"Changes\": [{
         \"Action\": \"UPSERT\",
         \"ResourceRecordSet\": {
-          \"Name\": \"$instance.$DOMAIN_NAME\",
+          \"Name\": \"$RECORD_NAME\",
           \"Type\": \"A\",
           \"TTL\": 120,
           \"ResourceRecords\": [{
