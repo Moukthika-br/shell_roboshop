@@ -53,6 +53,6 @@ VALIDATE $? "Installing Redis"
  VALIDATE $? "Start redis"
 
  END_TIME=$(date +%s)
-TOTAL_TIME=$(( $END_TIME - $START_TIME ))
+TOTAL_TIME=$(( $END_TIME-$START_TIME ))
 
 echo -e "Script execution completed successfully , $Y time taken: $TOTAL_TIME $N" | tee -a $LOG_FILE
