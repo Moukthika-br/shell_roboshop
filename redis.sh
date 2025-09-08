@@ -49,7 +49,7 @@ VALIDATE $? "Installing Redis"
  systemctl enable redis 
  VALIDATE $? "Enabling redis"
 
- systemct1 start redis
+ systemctl start redis
  VALIDATE $? "Start redis"
 
  END_TIME=$(date +%s)
