@@ -6,7 +6,8 @@ INSTANCES=("mongodb" "redis" "mysql" "rabbitmq" "catalogue" "user" "shipping" "p
 ZONE_ID="Z025072226A39JCBZP3HB"
 DOMAIN_NAME="moukthika.site"
 
-for instance in "${INSTANCES[@]}"; do
+for instance in "${INSTANCES[@]}"; 
+do
   echo "🚀 Launching instance: $instance"
 
   INSTANCE_INFO=$(aws ec2 run-instances \
