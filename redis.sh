@@ -46,7 +46,7 @@ VALIDATE $? "Installing Redis"
  sed -i -e 's/127.0.0.1/0.0.0.0/g' -e '/protected-mode/ c protected-mode no' /etc/redis/redis.conf
  VALIDATE $? "Edited redis.conf to accept remote connections"
 
- systemct1 enable redis 
+ systemctl enable redis 
  VALIDATE $? "Enabling redis"
 
  systemct1 start redis
