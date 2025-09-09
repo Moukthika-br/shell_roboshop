@@ -6,7 +6,7 @@ INSTANCES=("mongodb" "redis" "mysql" "rabbitmq" "catalogue" "user" "shipping" "p
 ZONE_ID="Z025072226A39JCBZP3HB"
 DOMAIN_NAME="moukthika.site"
 
-for instance in "${INSTANCES[@]}"; 
+for instance in "$@"; 
 do
   echo "🚀 Launching instance: $instance"
 
