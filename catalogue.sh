@@ -1,11 +1,11 @@
 #!/bin/bash
 
+
+source ./common.sh
+app_name=catalogue
+
 check_root
-
 nodejs_setup
-
-
-
 systemd_setup
 
 cp  $SCRIPT_DIR/Mongo.repo /etc/yum.repos.d/mongo.repo
