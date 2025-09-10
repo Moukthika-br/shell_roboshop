@@ -33,9 +33,11 @@ VALIDATE $? "making the application "
 curl -o /tmp/$app_name.zip https://roboshop-artifacts.s3.amazonaws.com/$app_name-v3.zip  &>>$LOG_FILE
 VALIDATE $? "Downloading the roboshop user application"
 
-cd /app
-unzip /tmp/$app_name.zip
-VALIDATE $? "unzipping the file"
+    rm -rf /app/*
+    cd /app 
+    unzip /tmp/$app_name.zip &>>$LOG_FILE
+    VALIDATE $? "unzipping $app_name"
+
 }
 #check the user has root privelages or not
 check_root(){
