@@ -14,6 +14,29 @@ SCRIPT_DIR=$PWD
 mkdir -p $LOGS_FOLDER
 echo "Script started executing at: $(date)" | tee -a $LOG_FILE
 
+app_set(){
+    
+id roboshop &>>$LOG_FILE
+if [ $? -ne 0 ]
+then 
+useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOG_FILE
+VALIDATE $? "creating the application user"
+
+else 
+
+echo -e "System user roboshop already created ... $Y SKIPPING $N"
+fi 
+
+mkdir -p /app  
+VALIDATE $? "making the application "
+
+curl -o /tmp/$app_name.zip https://roboshop-artifacts.s3.amazonaws.com/$app_name-v3.zip  &>>$LOG_FILE
+VALIDATE $? "Downloading the roboshop user application"
+
+cd /app
+unzip /tmp/$app_name.zip
+VALIDATE $? "unzipping the file"
+}
 #check the user has root privelages or not
 check_root(){
 if [ $USERID -ne 0 ]
@@ -36,8 +59,33 @@ VALIDATE(){
     fi
 }
 
+nodejs_setup(){
+    dnf module disable nodejs -y &>>$LOG_FILE
+VALIDATE $? "Disabling the  defaultnodejs"
+
+dnf module enable nodejs:20 -y &>>$LOG_FILE
+VALIDATE $? "enabling the nodejs"
+
+dnf install nodejs -y &>>$LOG_FILE
+VALIDATE $? "Installing the nodejs"
+
+npm install &>>$LOG_FILE
+VALIDATE $? "Installing dependencies"
+
+}
+
 print_time(){
     END_TIME=$(date +%s)
     TOTAL_TIME=$(($END_TIME - $START_TIME))
     echo -e "Script executed successfully, $Y Time taken: $TOTAL_TIME $N" 
+}
+
+systemd_setup(){
+    cp  $SCRIPT_DIR/$app_name.service /etc/systemd/system/$app_name.service
+VALIDATE $? "Copying $app_name service"
+    systemctl daemon-reload
+systemctl enable $app_name
+systemctl start $app_name
+VALIDATE $? "Starting $app_name"
+
 }
