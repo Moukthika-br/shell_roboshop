@@ -1,7 +1,7 @@
 #!/bin/bash
 
 source ./common.sh
-app_name = Mongodb
+app_name=Mongodb
 
 check_root
 cp Mongo.repo /etc/yum.repos.d/mongo.repo
